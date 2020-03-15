@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ASFAndroid</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- names for side bar -->
+    <string name="afs_status">AFS Status</string>
+    <string name="command">Command</string>
+    <string name="asf_setting">ASF Global Setting</string>
+    <string name="app_setting">App Setting</string>
+
+
+</resources>

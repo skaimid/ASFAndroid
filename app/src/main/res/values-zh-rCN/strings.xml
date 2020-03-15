@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ASFAndroid</string>
+    <string name="hello_blank_fragment">你好 fragment</string>
+    <string name="afs_status">ASF 状态</string>
+    <string name="command">命令</string>
+    <string name="asf_setting">ASF 全局设置</string>
+    <string name="app_setting">应用设置</string>
+</resources>

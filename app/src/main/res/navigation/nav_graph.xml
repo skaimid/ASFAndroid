@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/overviewFragment">
+
+    <fragment
+        android:id="@+id/overviewFragment"
+        android:name="tech.saltyfish.asfandroid.overview.OverviewFragment"
+        android:label="fragment_overview"
+        tools:layout="@layout/fragment_overview" >
+        <action
+            android:id="@+id/action_overviewFragment_to_appSettingFragment"
+            app:destination="@id/appSettingFragment" />
+        <action
+            android:id="@+id/action_overviewFragment_to_ASFSettingFragment"
+            app:destination="@id/ASFSettingFragment" />
+        <action
+            android:id="@+id/action_overviewFragment_to_ASFStatusFragment"
+            app:destination="@id/ASFStatusFragment" />
+        <action
+            android:id="@+id/action_overviewFragment_to_botStatusFragment"
+            app:destination="@id/botStatusFragment" />
+        <action
+            android:id="@+id/action_overviewFragment_to_commandFragment"
+            app:destination="@id/commandFragment" />
+        <action
+            android:id="@+id/action_overviewFragment_to_NLogFragment"
+            app:destination="@id/NLogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ASFSettingFragment"
+        android:name="tech.saltyfish.asfandroid.asfSetting.ASFSettingFragment"
+        android:label="fragment_asf_setting"
+        tools:layout="@layout/fragment_asf_setting" />
+    <fragment
+        android:id="@+id/appSettingFragment"
+        android:name="tech.saltyfish.asfandroid.appSetting.AppSettingFragment"
+        android:label="fragment_app_setting"
+        tools:layout="@layout/fragment_app_setting" />
+    <fragment
+        android:id="@+id/ASFStatusFragment"
+        android:name="tech.saltyfish.asfandroid.asfStatus.ASFStatusFragment"
+        android:label="fragment_asf_status"
+        tools:layout="@layout/fragment_asf_status" />
+    <fragment
+        android:id="@+id/botStatusFragment"
+        android:name="tech.saltyfish.asfandroid.botStatus.BotStatusFragment"
+        android:label="fragment_bot_status"
+        tools:layout="@layout/fragment_bot_status" >
+        <action
+            android:id="@+id/action_botStatusFragment_to_botSettingFragment"
+            app:destination="@id/botSettingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/botSettingFragment"
+        android:name="tech.saltyfish.asfandroid.botSetting.BotSettingFragment"
+        android:label="fragment_bot_setting"
+        tools:layout="@layout/fragment_bot_setting" />
+    <fragment
+        android:id="@+id/commandFragment"
+        android:name="tech.saltyfish.asfandroid.command.CommandFragment"
+        android:label="fragment_command"
+        tools:layout="@layout/fragment_command" />
+    <fragment
+        android:id="@+id/NLogFragment"
+        android:name="tech.saltyfish.asfandroid.nLog.NLogFragment"
+        android:label="fragment_n_log"
+        tools:layout="@layout/fragment_n_log" />
+</navigation>
