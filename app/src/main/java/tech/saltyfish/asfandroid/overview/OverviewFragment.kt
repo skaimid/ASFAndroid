@@ -18,9 +18,6 @@ class OverviewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentOverviewBinding.inflate(inflater)
-        binding.textView2.setOnClickListener {
-            binding.textView2.text = "nmsl"
-        }
 
         return binding.root
     }

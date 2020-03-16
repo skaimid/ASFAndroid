@@ -8,14 +8,8 @@
     <fragment
         android:id="@+id/overviewFragment"
         android:name="tech.saltyfish.asfandroid.overview.OverviewFragment"
-        android:label="fragment_overview"
-        tools:layout="@layout/fragment_overview" >
-        <action
-            android:id="@+id/action_overviewFragment_to_appSettingFragment"
-            app:destination="@id/appSettingFragment" />
-        <action
-            android:id="@+id/action_overviewFragment_to_ASFSettingFragment"
-            app:destination="@id/ASFSettingFragment" />
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_overview">
         <action
             android:id="@+id/action_overviewFragment_to_ASFStatusFragment"
             app:destination="@id/ASFStatusFragment" />
@@ -26,19 +20,14 @@
             android:id="@+id/action_overviewFragment_to_commandFragment"
             app:destination="@id/commandFragment" />
         <action
-            android:id="@+id/action_overviewFragment_to_NLogFragment"
-            app:destination="@id/NLogFragment" />
+            android:id="@+id/action_overviewFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
     </fragment>
     <fragment
         android:id="@+id/ASFSettingFragment"
         android:name="tech.saltyfish.asfandroid.asfSetting.ASFSettingFragment"
         android:label="fragment_asf_setting"
         tools:layout="@layout/fragment_asf_setting" />
-    <fragment
-        android:id="@+id/appSettingFragment"
-        android:name="tech.saltyfish.asfandroid.appSetting.AppSettingFragment"
-        android:label="fragment_app_setting"
-        tools:layout="@layout/fragment_app_setting" />
     <fragment
         android:id="@+id/ASFStatusFragment"
         android:name="tech.saltyfish.asfandroid.asfStatus.ASFStatusFragment"
@@ -48,7 +37,7 @@
         android:id="@+id/botStatusFragment"
         android:name="tech.saltyfish.asfandroid.botStatus.BotStatusFragment"
         android:label="fragment_bot_status"
-        tools:layout="@layout/fragment_bot_status" >
+        tools:layout="@layout/fragment_bot_status">
         <action
             android:id="@+id/action_botStatusFragment_to_botSettingFragment"
             app:destination="@id/botSettingFragment" />
@@ -64,8 +53,30 @@
         android:label="fragment_command"
         tools:layout="@layout/fragment_command" />
     <fragment
-        android:id="@+id/NLogFragment"
-        android:name="tech.saltyfish.asfandroid.nLog.NLogFragment"
-        android:label="fragment_n_log"
-        tools:layout="@layout/fragment_n_log" />
+        android:id="@+id/settingFragment"
+        android:name="tech.saltyfish.asfandroid.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting">
+        <action
+            android:id="@+id/action_settingFragment_to_ASFSettingFragment"
+            app:destination="@id/ASFSettingFragment"
+            app:enterAnim="@android:anim/fade_in" />
+        <action
+            android:id="@+id/action_settingFragment_to_aboutkFragment"
+            app:destination="@id/aboutFragment"
+            app:enterAnim="@android:anim/fade_in" />
+        <action
+            android:id="@+id/action_settingFragment_to_appSettingFragment"
+            app:destination="@id/appSettingFragment"
+            app:enterAnim="@android:anim/fade_in" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="tech.saltyfish.asfandroid.AboutFragment"
+        android:label="fragment_about" />
+    <fragment
+        android:id="@+id/appSettingFragment"
+        android:name="tech.saltyfish.asfandroid.appSetting.AppSettingFragment"
+        android:label="fragment_app_setting"
+        tools:layout="@layout/fragment_app_setting" />
 </navigation>

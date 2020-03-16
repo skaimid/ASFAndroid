@@ -5,5 +5,6 @@
     <string name="afs_status">ASF 状态</string>
     <string name="command">命令</string>
     <string name="asf_setting">ASF 全局设置</string>
-    <string name="app_setting">应用设置</string>
+    <string name="app_setting">设置</string>
+    <string name="about_app">关于本应用</string>
 </resources>
