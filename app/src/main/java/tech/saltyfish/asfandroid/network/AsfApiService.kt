@@ -4,11 +4,12 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.POST
 
 private const val BASE_URL =
     "https://steam.saltyfish.art/Api/"
@@ -27,12 +28,20 @@ private val retrofit = Retrofit.Builder()
 interface AsfApiService {
 
     @GET("ASF")
-
-    fun getProperties(@Header("Authentication") password:String):
+    fun getAsfPropertiesAsync(@Header("Authentication") password: String):
             Deferred<AsfProperty>
+
+    @POST("Command")
+    fun getCommandResultAsync(
+        @Header("Authentication") password: String,
+        @Body command: CommandPostProperty
+    ):
+            Deferred<CommandProperty>
+
 }
 
 object AsfApi {
-    val retrofitService : AsfApiService by lazy {
-        retrofit.create(AsfApiService::class.java) }
+    val retrofitService: AsfApiService by lazy {
+        retrofit.create(AsfApiService::class.java)
+    }
 }

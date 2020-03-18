@@ -9,6 +9,7 @@
     <string name="asf_setting">ASF Global Setting</string>
     <string name="app_setting">App Setting</string>
     <string name="about_app">About this app</string>
+    <string name="button_exe">execute</string>
 
 
 </resources>
