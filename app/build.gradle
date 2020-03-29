@@ -88,7 +88,9 @@ dependencies {
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$version_retrofit_coroutines_adapter"
 
 
-
+    //glide
+    def version_glide = '4.11.0'
+    implementation "com.github.bumptech.glide:glide:$version_glide"
 
 
     testImplementation 'junit:junit:4.12'

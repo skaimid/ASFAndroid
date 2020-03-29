@@ -41,6 +41,8 @@
         <action
             android:id="@+id/action_botStatusFragment_to_botSettingFragment"
             app:destination="@id/botSettingFragment" />
+        <argument android:name="botName"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/botSettingFragment"

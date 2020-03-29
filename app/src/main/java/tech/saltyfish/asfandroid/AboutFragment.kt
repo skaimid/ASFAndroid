@@ -1,9 +1,7 @@
 package tech.saltyfish.asfandroid
 
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
-import android.text.Spanned
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,14 +26,7 @@ class AboutFragment : Fragment() {
         binding.aboutTextView.text = about.toSpanned()
         return binding.root
     }
-    private fun String.toSpanned(): Spanned {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
-        } else {
-            @Suppress("DEPRECATION")
-            return Html.fromHtml(this)
-        }
-    }
+
 
 }
 

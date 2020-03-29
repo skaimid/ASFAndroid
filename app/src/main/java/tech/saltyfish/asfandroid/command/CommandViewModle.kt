@@ -7,6 +7,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import tech.saltyfish.asfandroid.basicAuthorization
 import tech.saltyfish.asfandroid.network.AsfApi
 import tech.saltyfish.asfandroid.network.CommandPostProperty
 import java.lang.Exception
@@ -31,13 +32,14 @@ class CommandViewModel : ViewModel() {
         coroutineScope.launch {
             var getCommandResultDeferred = AsfApi.retrofitService.getCommandResultAsync(
                 "zzx20001223",
+                basicAuthorization("skaimid", "vEY8xU9H9fjmXP2"),
                 CommandPostProperty(command)
             )
 
             try {
                 var rs = getCommandResultDeferred.await()
                 _commandLine.value = _commandLine.value + "<<< " + rs.result + '\n'
-            }catch (e:Exception){
+            } catch (e: Exception) {
                 _commandLine.value = _commandLine.value + "Error: " + e.message + '\n'
             }
 
