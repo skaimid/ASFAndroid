@@ -6,7 +6,7 @@
     <data>
         <import type="android.view.View" />
         <variable
-            name="img_property"
+            name="bot_property"
             type="tech.saltyfish.asfandroid.network.Bot" />
     </data>
 
@@ -22,33 +22,41 @@
 
             <ImageView
                 android:id="@+id/list_bot_img"
-                android:layout_width="128dp"
-                android:layout_height="128dp"
-                android:layout_margin="8dp"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_margin="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:userAvatarHash="@{img_property.avatarHash}" />
+                app:userAvatarHash="@{bot_property.avatarHash}" />
 
             <TextView
                 android:id="@+id/list_bot_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_margin="8dp"
-                android:text="@{img_property.botName}"
+                android:text="@{bot_property.botName}"
                 android:textSize="24sp"
                 app:layout_constraintStart_toEndOf="@+id/list_bot_img"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/list_bot_img" />
 
             <TextView
                 android:id="@+id/time_remaining"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:text="233"
+                android:layout_marginTop="8dp"
                 app:layout_constraintStart_toEndOf="@+id/list_bot_img"
                 app:layout_constraintTop_toBottomOf="@+id/list_bot_name" />
+
+            <TextView
+                android:id="@+id/bot_status"
+                android:layout_width="0dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@+id/list_bot_img"
+                app:layout_constraintTop_toBottomOf="@+id/time_remaining" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

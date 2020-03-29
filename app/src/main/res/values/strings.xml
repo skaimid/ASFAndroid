@@ -10,6 +10,7 @@
     <string name="app_setting">App Setting</string>
     <string name="about_app">About this app</string>
     <string name="button_exe">execute</string>
+    <string name="reamianing_text_words">"Time remaining: "</string>
 
 
 </resources>

@@ -55,14 +55,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
-            <MultiAutoCompleteTextView
+            <AutoCompleteTextView
                 android:id="@+id/command_input"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="@dimen/input_height"
-                android:text="MultiAutoCompleteTextView"
+                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/exe_button"
                 app:layout_constraintStart_toStartOf="parent" />

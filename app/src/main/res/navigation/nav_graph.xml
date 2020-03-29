@@ -11,9 +11,6 @@
         android:label="@string/app_name"
         tools:layout="@layout/fragment_overview">
         <action
-            android:id="@+id/action_overviewFragment_to_ASFStatusFragment"
-            app:destination="@id/ASFStatusFragment" />
-        <action
             android:id="@+id/action_overviewFragment_to_botStatusFragment"
             app:destination="@id/botStatusFragment" />
         <action
@@ -28,11 +25,6 @@
         android:name="tech.saltyfish.asfandroid.asfSetting.ASFSettingFragment"
         android:label="fragment_asf_setting"
         tools:layout="@layout/fragment_asf_setting" />
-    <fragment
-        android:id="@+id/ASFStatusFragment"
-        android:name="tech.saltyfish.asfandroid.asfStatus.ASFStatusFragment"
-        android:label="fragment_asf_status"
-        tools:layout="@layout/fragment_asf_status" />
     <fragment
         android:id="@+id/botStatusFragment"
         android:name="tech.saltyfish.asfandroid.botStatus.BotStatusFragment"
