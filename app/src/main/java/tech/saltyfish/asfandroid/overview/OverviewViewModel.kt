@@ -1,9 +1,13 @@
 package tech.saltyfish.asfandroid.overview
 
+import android.app.Application
+import android.content.SharedPreferences
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.preference.PreferenceManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -12,7 +16,10 @@ import tech.saltyfish.asfandroid.basicAuthorization
 import tech.saltyfish.asfandroid.network.AsfApi
 import tech.saltyfish.asfandroid.network.Bot
 
-class OverviewViewModel : ViewModel() {
+class OverviewViewModel(application: Application) : AndroidViewModel(application) {
+    private val context = getApplication<Application>().applicationContext
+    private val sharedPreferences =
+        PreferenceManager.getDefaultSharedPreferences(context /* Activity context */)
 
     private val _system = MutableLiveData<String>()
     val system: LiveData<String>
@@ -34,7 +41,7 @@ class OverviewViewModel : ViewModel() {
     init {
         _system.value = "-"
 
-        getSystemInfo()
+        //getSystemInfo()
         getBotInfo()
 
     }
@@ -43,17 +50,22 @@ class OverviewViewModel : ViewModel() {
     private fun getSystemInfo() {
         coroutineScope.launch {
 
-            var getAsfPropertyDeferred =
-                AsfApi.retrofitService.getAsfPropertiesAsync(
-                    "zzx20001223",
-                    basicAuthorization("skaimid", "vEY8xU9H9fjmXP2")
-                )
-            try {
-                var rs = getAsfPropertyDeferred.await()
+            val url = sharedPreferences.getString("asfUrl", "");
+            if (url == null) {
+                Log.e("getSystemInfo", "url error")
+            } else {
+                var getAsfPropertyDeferred =
+                    AsfApi.retrofitService.getAsfPropertiesAsync(
+                        "zzx20001223",
+                        basicAuthorization("skaimid", "vEY8xU9H9fjmXP2")
+                    )
+                try {
+                    var rs = getAsfPropertyDeferred.await()
 
-                _system.value = rs.result.globalConfig.iPC.toString()
-            } catch (e: Exception) {
-                Log.e("getSystemInfo", e.message.toString())
+                    _system.value = rs.result.globalConfig.iPC.toString()
+                } catch (e: Exception) {
+                    Log.e("getSystemInfo", e.message.toString())
+                }
             }
         }
     }
@@ -61,17 +73,21 @@ class OverviewViewModel : ViewModel() {
 
     private fun getBotInfo() {
         coroutineScope.launch {
-
-            var getBotPropertyDeferred =
-                AsfApi.retrofitService.getBotPropertiesAsync(
-                    "zzx20001223",
-                    basicAuthorization("skaimid", "vEY8xU9H9fjmXP2")
-                )
-            try {
-                var rs = getBotPropertyDeferred.await()
-                _bots.value = rs.result.values.toList()
-            } catch (e: Exception) {
-                Log.e("getBotInfo", e.message.toString())
+            val url = sharedPreferences.getString("asfUrl", "");
+            if (url == null) {
+                Log.e("getSystemInfo", "url error")
+            } else {
+                var getBotPropertyDeferred =
+                    AsfApi.retrofitService.getBotPropertiesAsync(
+                        "zzx20001223",
+                        basicAuthorization("skaimid", "vEY8xU9H9fjmXP2")
+                    )
+                try {
+                    var rs = getBotPropertyDeferred.await()
+                    _bots.value = rs.result.values.toList()
+                } catch (e: Exception) {
+                    Log.e("getBotInfo", e.message.toString())
+                }
             }
         }
     }

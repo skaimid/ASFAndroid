@@ -9,4 +9,5 @@
     <string name="about_app">关于本应用</string>
     <string name="button_exe">执行</string>
     <string name="reamianing_text_words">"剩余时间: "</string>
+    <string name="asf_url">ASF 服务端 Url</string>
 </resources>

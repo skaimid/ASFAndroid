@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        app:title="Basic Setting">
+
+        <EditTextPreference
+            app:key="asfUrl"
+            app:title="@string/asf_url"
+            app:summary="e.g. https://asf.example.com/"
+            />
+
+        <EditTextPreference
+            app:key="asfIpcPass"
+            app:title="Ipc Password"
+            />
+    </PreferenceCategory>
+    <PreferenceCategory
+        app:title="Basic Auth Setting">
+        <EditTextPreference
+            app:key="basicAuthUsername"
+            app:title="Basic Auth User Name"/>
+
+        <EditTextPreference
+            app:key="basicAuthPass"
+            app:title="Basic Auth Password"/>
+
+    </PreferenceCategory>
+
+
+        <SwitchPreferenceCompat
+            app:key="notifications"
+            app:title="Enable message notifications"/>
+
+        <Preference
+            app:key="feedback"
+            app:title="Send feedback"
+            app:summary="Report technical issues or suggest new features"/>
+
+
+</PreferenceScreen>

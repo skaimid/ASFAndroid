@@ -1,6 +1,5 @@
 package tech.saltyfish.asfandroid.overview
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -25,7 +24,7 @@ class BotGridAdapter(private val onClickListener: OnClickListener) : ListAdapter
                 else -> "Time left: " + botProperty.cardsFarmer.timeRemaining
             }
 
-
+            // TODO: use Android resources instead
             if(botProperty.botConfig.enabled){
                 if(botProperty.isConnectedAndLoggedOn){
                     if(botProperty.cardsFarmer.paused){

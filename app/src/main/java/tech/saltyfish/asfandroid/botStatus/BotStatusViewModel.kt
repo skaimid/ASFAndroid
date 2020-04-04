@@ -25,25 +25,25 @@ class BotStatusViewModel(botName: String, application: Application) :
 
 
     init {
-        getBotInfo(botName)
+        //getBotInfo(botName)
 
     }
 
-    private fun getBotInfo(botName: String) {
-        coroutineScope.launch {
-
-            var getBotPropertyDeferred =
-                AsfApi.retrofitService.getBotPropertiesAsync(
-                    "zzx20001223",
-                    basicAuthorization("skaimid", "vEY8xU9H9fjmXP2"), botName
-                )
-            try {
-                var rs = getBotPropertyDeferred.await()
-                _bot.value = rs.result.values.toList()[0]
-            } catch (e: Exception) {
-                Log.e("getBotInfo", e.message.toString())
-            }
-        }
-    }
+//    private fun getBotInfo(botName: String) {
+//        coroutineScope.launch {
+//
+//            var getBotPropertyDeferred =
+//                AsfApi.retrofitService.getBotPropertiesAsync(
+//                    "zzx20001223",
+//                    basicAuthorization("skaimid", "vEY8xU9H9fjmXP2"), botName
+//                )
+//            try {
+//                var rs = getBotPropertyDeferred.await()
+//                _bot.value = rs.result.values.toList()[0]
+//            } catch (e: Exception) {
+//                Log.e("getBotInfo", e.message.toString())
+//            }
+//        }
+//    }
 
 }

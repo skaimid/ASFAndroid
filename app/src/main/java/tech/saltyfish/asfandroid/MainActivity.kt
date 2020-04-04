@@ -1,26 +1,32 @@
 package tech.saltyfish.asfandroid
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
 import android.os.Bundle
-import android.view.MenuItem
-import androidx.databinding.DataBindingUtil
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.findNavController
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
+import androidx.preference.PreferenceManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
 
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        var context: Context? = null
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        context = applicationContext
         setContentView(R.layout.activity_main)
+
+        val sharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(context /* Activity context */)
+
+        val testConfigFragment = TestConfigFragment()
+        testConfigFragment.show(supportFragmentManager, "waiting")
+
 
         // Bottom navigation
         val navHostFragment =
@@ -29,5 +35,24 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<BottomNavigationView>(R.id.bottom_nav)
             .setupWithNavController(navController)
+
+
+        if (connTest(
+                sharedPreferences.getString("asfUrl", ""),
+                sharedPreferences.getString("asfIpcPass", ""),
+                sharedPreferences.getString("basicAuthUsername", ""),
+                sharedPreferences.getString("basicAuthPass", "")
+            )
+        ) {
+            testConfigFragment.dismiss()
+        } else {
+            navController.navigate(R.id.appSettingFragment)
+            findViewById<BottomNavigationView>(R.id.bottom_nav)
+                .visibility = View.INVISIBLE
+            testConfigFragment.dismiss()
+        }
+
+        findViewById<BottomNavigationView>(R.id.bottom_nav)
+            .visibility = View.VISIBLE
     }
 }
