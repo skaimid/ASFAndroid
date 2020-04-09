@@ -36,37 +36,8 @@ fun basicAuthorization(userName: String?, passWord: String?): String {
 // Test if url is valid.
 fun urlTest(url: String?): Boolean {
     val pattern = "(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]"
-    return if (url != null) {
+    return if (url != null && url != "") {
         Pattern.matches(pattern, url) and (url[url.length - 1] == '/')
     } else false
-
 }
 
-fun connTest(
-    url: String?,
-    ipcPass: String?,
-    basicAuthUsername: String?,
-    basicAuthPass: String?
-): Boolean {
-    if (urlTest(url)) {
-        var isSuccess = false
-        AsfApi.retrofitService.testApi(
-            ipcPass,
-            basicAuthorization(basicAuthUsername, basicAuthPass)
-        ).enqueue(object : Callback<AsfProperty> {
-            override fun onFailure(call: Call<AsfProperty>, t: Throwable) {
-                isSuccess = false
-            }
-
-            override fun onResponse(call: Call<AsfProperty>, response: Response<AsfProperty>) {
-                isSuccess = if (response.body() == null) {
-                    false
-                } else response.body()!!.success
-                Log.d("a",isSuccess.toString())
-            }
-
-        })
-
-    }
-    return false
-}

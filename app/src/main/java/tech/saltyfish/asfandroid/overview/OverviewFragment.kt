@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import kotlinx.android.synthetic.main.activity_main.*
+import tech.saltyfish.asfandroid.MainActivity
 import tech.saltyfish.asfandroid.databinding.FragmentOverviewBinding
 
 
@@ -19,6 +21,9 @@ class OverviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // This Fragment has a Bottom Bar
+        (requireActivity() as MainActivity).bottom_nav.visibility = View.VISIBLE
+
         val binding = FragmentOverviewBinding.inflate(inflater)
         viewModel = ViewModelProvider(this).get(OverviewViewModel::class.java)
         binding.overviewViewModel = viewModel

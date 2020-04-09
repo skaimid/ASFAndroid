@@ -39,7 +39,7 @@ class CommandViewModel : ViewModel() {
             if (baseUrl == null) {
                 Log.e("getSystemInfo", "url error")
             } else {
-                var getCommandResultDeferred = AsfApi.retrofitService.getCommandResultAsync(
+                var getCommandResultDeferred = AsfApi.retrofitService().getCommandResultAsync(
                     "zzx20001223",
                     basicAuthorization("skaimid", "vEY8xU9H9fjmXP2"),
                     CommandPostProperty(command)

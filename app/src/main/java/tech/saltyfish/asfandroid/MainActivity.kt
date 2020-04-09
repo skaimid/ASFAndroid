@@ -2,7 +2,9 @@ package tech.saltyfish.asfandroid
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -24,9 +26,6 @@ class MainActivity : AppCompatActivity() {
         val sharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(context /* Activity context */)
 
-        val testConfigFragment = TestConfigFragment()
-        testConfigFragment.show(supportFragmentManager, "waiting")
-
 
         // Bottom navigation
         val navHostFragment =
@@ -36,23 +35,9 @@ class MainActivity : AppCompatActivity() {
         findViewById<BottomNavigationView>(R.id.bottom_nav)
             .setupWithNavController(navController)
 
-
-        if (connTest(
-                sharedPreferences.getString("asfUrl", ""),
-                sharedPreferences.getString("asfIpcPass", ""),
-                sharedPreferences.getString("basicAuthUsername", ""),
-                sharedPreferences.getString("basicAuthPass", "")
-            )
-        ) {
-            testConfigFragment.dismiss()
-        } else {
+        if(!urlTest(sharedPreferences.getString("asfUrl",""))){
             navController.navigate(R.id.appSettingFragment)
-            findViewById<BottomNavigationView>(R.id.bottom_nav)
-                .visibility = View.INVISIBLE
-            testConfigFragment.dismiss()
+            Toast.makeText(this,"Check you url",Toast.LENGTH_LONG).show()
         }
-
-        findViewById<BottomNavigationView>(R.id.bottom_nav)
-            .visibility = View.VISIBLE
     }
 }

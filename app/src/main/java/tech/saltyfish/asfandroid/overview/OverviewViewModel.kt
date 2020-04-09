@@ -55,7 +55,7 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
                 Log.e("getSystemInfo", "url error")
             } else {
                 var getAsfPropertyDeferred =
-                    AsfApi.retrofitService.getAsfPropertiesAsync(
+                    AsfApi.retrofitService().getAsfPropertiesAsync(
                         "zzx20001223",
                         basicAuthorization("skaimid", "vEY8xU9H9fjmXP2")
                     )
@@ -78,7 +78,7 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
                 Log.e("getSystemInfo", "url error")
             } else {
                 var getBotPropertyDeferred =
-                    AsfApi.retrofitService.getBotPropertiesAsync(
+                    AsfApi.retrofitService().getBotPropertiesAsync(
                         "zzx20001223",
                         basicAuthorization("skaimid", "vEY8xU9H9fjmXP2")
                     )

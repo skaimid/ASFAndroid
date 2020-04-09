@@ -70,7 +70,7 @@
         android:label="fragment_about" />
     <fragment
         android:id="@+id/appSettingFragment"
-        android:name="tech.saltyfish.asfandroid.appSetting.AppSettingFragment"
+        android:name="tech.saltyfish.asfandroid.AppSettingFragment"
         android:label="fragment_app_setting"
-        tools:layout="@layout/fragment_app_setting" />
+        />
 </navigation>

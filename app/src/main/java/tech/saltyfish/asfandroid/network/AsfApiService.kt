@@ -15,21 +15,6 @@ import tech.saltyfish.asfandroid.basicAuthorization
 
 private val sharedPreferences =
     PreferenceManager.getDefaultSharedPreferences(MainActivity.context /* Activity context */)
-val baseUrl = sharedPreferences.getString("asfUrl", "")
-
-private val BASE_URL =
-    baseUrl + "Api/"
-
-// use moshi to phrase json
-private val moshi = Moshi.Builder()
-    .add(KotlinJsonAdapterFactory())
-    .build()
-
-private val retrofit = Retrofit.Builder()
-    .addConverterFactory(MoshiConverterFactory.create(moshi))
-    .addCallAdapterFactory(CoroutineCallAdapterFactory())
-    .baseUrl(BASE_URL)
-    .build()
 
 interface AsfApiService {
 
@@ -65,13 +50,29 @@ interface AsfApiService {
 }
 
 object AsfApi {
-    val retrofitService: AsfApiService by lazy {
-        retrofit.create(AsfApiService::class.java)
-    }
-}
 
-fun newUrl() {
-    retrofit.newBuilder()
-        .baseUrl(sharedPreferences.getString("asfUrl", "") + "Api/")
-    Log.d("newUrl","urlChanged: {${retrofit.baseUrl()}}")
+    fun retrofitService(): AsfApiService {
+        var baseUrl = sharedPreferences.getString("asfUrl", "")?:"https://baidu.com/"
+
+        if(baseUrl == ""){
+            baseUrl = "https://baidu.com/"
+        }
+
+        val BASE_URL =
+            //"https://saltyfish.tech/api/"
+            baseUrl + "Api/"
+
+        // use moshi to phrase json
+        val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+
+        val retrofit = Retrofit.Builder()
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .baseUrl(BASE_URL)
+            .build()
+
+        return retrofit.create(AsfApiService::class.java)
+    }
 }
