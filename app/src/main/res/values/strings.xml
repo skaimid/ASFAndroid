@@ -10,8 +10,22 @@
     <string name="app_setting">App Setting</string>
     <string name="about_app">About this app</string>
     <string name="button_exe">execute</string>
-    <string name="reamianing_text_words">"Time remaining: "</string>
+    <string name="remaining_text_words">Time Remaining\n %1$s</string>
     <string name="asf_url">ASF Server Url</string>
+    <string name="remaining_game_text">Game Remaining\n %1$d</string>
+    <string name="card_left_text">Card Remaining\n  %1$d</string>
+    <string name="online_text">Online</string>
+    <string name="pause_text">Paused</string>
+    <string name="offline_text">Offline</string>
+    <string name="disable_text">Disabled</string>
+    <string name="farm_complete_text">Farm Complete!</string>
+    <string name="Farming_text">Farming … Time left : %1$s</string>
+    <string name="overview_bot_status_text">Bots: %1$d Online, %2$d Paused, %3$d Offline, %4$d Disabled</string>
+    <string name="start_pause">Start/Pause</string>
+    <string name="exist_text">Delete</string>
+    <string name="loading_text">loading...</string>
+    <string name="edit_bot_text">Edit</string>
+    <string name="submit_text">submit</string>
 
 
 </resources>

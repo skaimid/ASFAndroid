@@ -21,9 +21,8 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
     private val sharedPreferences =
         PreferenceManager.getDefaultSharedPreferences(context /* Activity context */)
 
-    private val _system = MutableLiveData<String>()
-    val system: LiveData<String>
-        get() = _system
+
+
 
     private val _bots = MutableLiveData<List<Bot>>()
     val bots: LiveData<List<Bot>>
@@ -39,7 +38,7 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
     )
 
     init {
-        _system.value = "-"
+
 
         //getSystemInfo()
         getBotInfo()
@@ -47,28 +46,28 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
     }
 
 
-    private fun getSystemInfo() {
-        coroutineScope.launch {
-
-            val url = sharedPreferences.getString("asfUrl", "");
-            if (url == null) {
-                Log.e("getSystemInfo", "url error")
-            } else {
-                var getAsfPropertyDeferred =
-                    AsfApi.retrofitService().getAsfPropertiesAsync(
-                        "zzx20001223",
-                        basicAuthorization("skaimid", "vEY8xU9H9fjmXP2")
-                    )
-                try {
-                    var rs = getAsfPropertyDeferred.await()
-
-                    _system.value = rs.result.globalConfig.iPC.toString()
-                } catch (e: Exception) {
-                    Log.e("getSystemInfo", e.message.toString())
-                }
-            }
-        }
-    }
+//    private fun getSystemInfo() {
+//        coroutineScope.launch {
+//
+//            val url = sharedPreferences.getString("asfUrl", "");
+//            if (url == null) {
+//                Log.e("getSystemInfo", "url error")
+//            } else {
+//                val getAsfPropertyDeferred =
+//                    AsfApi.retrofitService().getAsfPropertiesAsync(
+//                        "zzx20001223",
+//                        basicAuthorization("skaimid", "vEY8xU9H9fjmXP2")
+//                    )
+//                try {
+//                    val rs = getAsfPropertyDeferred.await()
+//
+//                    _system.value = rs.result.globalConfig.iPC.toString()
+//                } catch (e: Exception) {
+//                    Log.e("getSystemInfo", e.message.toString())
+//                }
+//            }
+//        }
+//    }
 
 
     private fun getBotInfo() {
@@ -77,13 +76,13 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
             if (url == null) {
                 Log.e("getSystemInfo", "url error")
             } else {
-                var getBotPropertyDeferred =
+                val getBotPropertyDeferred =
                     AsfApi.retrofitService().getBotPropertiesAsync(
                         "zzx20001223",
                         basicAuthorization("skaimid", "vEY8xU9H9fjmXP2")
                     )
                 try {
-                    var rs = getBotPropertyDeferred.await()
+                    val rs = getBotPropertyDeferred.await()
                     _bots.value = rs.result.values.toList()
                 } catch (e: Exception) {
                     Log.e("getBotInfo", e.message.toString())
@@ -101,6 +100,33 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
      */
     fun displayPropertyDetailsComplete() {
         _navigateToSelectedProperty.value = null
+    }
+
+    fun getGameLeft(): Int {
+        var sum = 0;
+        bots.value?.forEach {
+            sum += it.cardsFarmer.gamesToFarm.size
+        }
+        return sum
+    }
+
+    fun getTimeLeft(): String {
+        return bots.value?.maxBy {
+            it.cardsFarmer.timeRemaining
+        }?.cardsFarmer?.timeRemaining ?: "0"
+    }
+
+    fun getCardLeft(): Int {
+        var sum = 0;
+        bots.value?.forEach { bot ->
+            bot.cardsFarmer.currentGamesFarming.forEach {
+                sum += it.cardsRemaining
+            }
+            bot.cardsFarmer.gamesToFarm.forEach {
+                sum += it.cardsRemaining
+            }
+        }
+        return sum
     }
 
 }

@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/ASFSettingFragment"
-        android:name="tech.saltyfish.asfandroid.asfSetting.ASFSettingFragment"
+        android:name="tech.saltyfish.asfandroid.ASFSettingFragment"
         android:label="fragment_asf_setting"
         tools:layout="@layout/fragment_asf_setting" />
     <fragment
@@ -40,7 +40,11 @@
         android:id="@+id/botSettingFragment"
         android:name="tech.saltyfish.asfandroid.botSetting.BotSettingFragment"
         android:label="fragment_bot_setting"
-        tools:layout="@layout/fragment_bot_setting" />
+        tools:layout="@layout/fragment_bot_setting" >
+        <argument
+            android:name="botName"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/commandFragment"
         android:name="tech.saltyfish.asfandroid.command.CommandFragment"

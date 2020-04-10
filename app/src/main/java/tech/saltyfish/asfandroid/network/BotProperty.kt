@@ -112,12 +112,7 @@ data class BotConfig(
 
 @JsonClass(generateAdapter = true)
 data class SteamUserPermissions(
-    @Json(name = "additionalProp1")
-    val additionalProp1: Int = 0,
-    @Json(name = "additionalProp2")
-    val additionalProp2: Int = 0,
-    @Json(name = "additionalProp3")
-    val additionalProp3: Int = 0
+    val Prop:Map<String,Long> = mapOf()
 )
 
 @JsonClass(generateAdapter = true)

@@ -68,13 +68,16 @@
 
             <Button
                 android:id="@+id/exe_button"
-                style="@style/Widget.AppCompat.Button.Colored"
+                android:textColor="@color/primaryTextColor"
+                android:shadowColor="@color/secondaryColor"
+                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="@string/button_exe"
                 app:layout_constraintBottom_toBottomOf="@+id/command_input"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:rippleColor="@color/secondaryColor" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

@@ -8,6 +8,18 @@
     <string name="app_setting">设置</string>
     <string name="about_app">关于本应用</string>
     <string name="button_exe">执行</string>
-    <string name="reamianing_text_words">"剩余时间: "</string>
-    <string name="asf_url">ASF 服务端 Url</string>
+    <string name="remaining_text_words">剩余时间: %1$s</string>
+    <string name="asf_url">ASF Url</string>
+    <string name="remaining_game_text">剩余游戏\n %1$d</string>
+    <string name="card_left_text">剩余卡牌\n %1$d</string>
+    <string name="online_text">在线</string>
+    <string name="pause_text">暂停</string>
+    <string name="offline_text">离线</string>
+    <string name="disable_text">禁用</string>
+    <string name="farm_complete_text">挂卡已完成!</string>
+    <string name="Farming_text">挂卡中… 剩余时间: %1$s</string>
+    <string name="overview_bot_status_text">机器人: %1$d 在线, %2$d 暂停, %3$d 离线, %4$d 禁用</string>
+    <string name="start_pause">开始/暂停</string>
+    <string name="exist_text">删除</string>
+    <string name="edit_bot_text">修改</string>
 </resources>

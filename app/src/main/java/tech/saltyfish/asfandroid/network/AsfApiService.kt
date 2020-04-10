@@ -1,6 +1,5 @@
 package tech.saltyfish.asfandroid.network
 
-import android.util.Log
 import androidx.preference.PreferenceManager
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
@@ -11,7 +10,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
 import tech.saltyfish.asfandroid.MainActivity
-import tech.saltyfish.asfandroid.basicAuthorization
 
 private val sharedPreferences =
     PreferenceManager.getDefaultSharedPreferences(MainActivity.context /* Activity context */)
@@ -24,6 +22,14 @@ interface AsfApiService {
         @Header("Authorization") basicAuthorization: String
     ):
             Deferred<AsfProperty>
+
+    @POST("ASF")
+    fun updateAsfConfigAsync(
+        @Header("Authentication") password: String,
+        @Header("Authorization") basicAuthorization: String,
+        @Body() globalConfig: GlobalConfig
+    ):
+            Deferred<ExeResult>
 
     @POST("Command")
     fun getCommandResultAsync(
@@ -41,6 +47,51 @@ interface AsfApiService {
     ):
             Deferred<BotProperty>
 
+    @POST("Bot/{botNames}/Pause")
+    fun pauseBotAsync(
+        @Header("Authentication") password: String,
+        @Header("Authorization") basicAuthorization: String,
+        @Path("botNames") botNames: String,
+        @Body command: CommandInfo
+    ):
+            Deferred<ExeResult>
+
+    @POST("Bot/{botNames}/Resume")
+    fun resumeBotAsync(
+        @Header("Authentication") password: String,
+        @Header("Authorization") basicAuthorization: String,
+        @Path("botNames") botNames: String
+    ):
+            Deferred<ExeResult>
+
+    @POST("Bot/{botNames}/Start")
+    fun stopBotAsync(
+        @Header("Authentication") password: String,
+        @Header("Authorization") basicAuthorization: String,
+        @Path("botNames") botNames: String
+    ):
+            Deferred<ExeResult>
+
+
+    @POST("Bot/{botNames}/Start")
+    fun startBotAsync(
+        @Header("Authentication") password: String,
+        @Header("Authorization") basicAuthorization: String,
+        @Path("botNames") botNames: String
+    ):
+            Deferred<ExeResult>
+
+
+    @DELETE("Bot/{botNames}")
+    fun deleteBotAsync(
+        @Header("Authentication") password: String,
+        @Header("Authorization") basicAuthorization: String,
+        @Path("botNames") botNames: String
+    ):
+            Deferred<ExeResult>
+
+
+    // test if service is usable or configuration is right
     @GET("ASF")
     fun testApi(
         @Header("Authentication") password: String?,
@@ -52,9 +103,9 @@ interface AsfApiService {
 object AsfApi {
 
     fun retrofitService(): AsfApiService {
-        var baseUrl = sharedPreferences.getString("asfUrl", "")?:"https://baidu.com/"
+        var baseUrl = sharedPreferences.getString("asfUrl", "") ?: "https://baidu.com/"
 
-        if(baseUrl == ""){
+        if (baseUrl == "") {
             baseUrl = "https://baidu.com/"
         }
 

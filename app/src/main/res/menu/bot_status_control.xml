@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/pause_start"
+        android:title="@string/start_pause"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/delete_text"
+        android:title="@string/exist_text"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/edit_bot_text"
+        android:title="@string/edit_bot_text"
+        app:showAsAction="ifRoom"/>
+</menu>

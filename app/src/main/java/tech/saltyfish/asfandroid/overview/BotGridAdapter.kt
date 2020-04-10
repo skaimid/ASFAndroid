@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import tech.saltyfish.asfandroid.MainActivity.Companion.context
+import tech.saltyfish.asfandroid.R
 import tech.saltyfish.asfandroid.databinding.BotItemBinding
 import tech.saltyfish.asfandroid.network.Bot
 
@@ -19,27 +21,28 @@ class BotGridAdapter(private val onClickListener: OnClickListener) : ListAdapter
             // This is important, because it forces the data binding to execute immediately,
             // which allows the RecyclerView to make the correct view size measurements
             binding.executePendingBindings()
-            binding.timeRemaining.text = when(botProperty.cardsFarmer.timeRemaining){
-                "00:00:00" -> "complete"
-                else -> "Time left: " + botProperty.cardsFarmer.timeRemaining
+            binding.timeRemaining.text = when (botProperty.cardsFarmer.timeRemaining) {
+                "00:00:00" -> context?.getText(R.string.farm_complete_text) ?: "complete"
+                else -> context?.getString(
+                    R.string.Farming_text,
+                    botProperty.cardsFarmer.timeRemaining
+                )
             }
-
-            // TODO: use Android resources instead
-            if(botProperty.botConfig.enabled){
-                if(botProperty.isConnectedAndLoggedOn){
-                    if(botProperty.cardsFarmer.paused){
-                        binding.botStatus.text = "Paused"
-                    }else{
-                        binding.botStatus.text = "Online"
+            if (botProperty.botConfig.enabled) {
+                if (botProperty.isConnectedAndLoggedOn) {
+                    if (botProperty.cardsFarmer.paused) {
+                        binding.botStatus.text = context?.getText(R.string.pause_text) ?: "Paused"
+                    } else {
+                        binding.botStatus.text = context?.getText(R.string.online_text) ?: "Online"
                     }
-                }else{
-                    binding.botStatus.text = "Offline"
+                } else {
+                    binding.botStatus.text = context?.getText(R.string.offline_text) ?: "Offline"
                 }
-            } else{
-                binding.botStatus.text = "Disabled"
+            } else {
+                binding.botStatus.text = context?.getText(R.string.disable_text) ?: "Disabled"
             }
 
-            
+
         }
     }
 
