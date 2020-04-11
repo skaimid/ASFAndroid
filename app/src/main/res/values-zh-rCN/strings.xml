@@ -22,4 +22,7 @@
     <string name="start_pause">开始/暂停</string>
     <string name="exist_text">删除</string>
     <string name="edit_bot_text">修改</string>
+    <string name="loading_text">加载中...</string>
+    <string name="submit_text">提交</string>
+    <string name="bot_card_left_text">剩余卡片: %1$d</string>
 </resources>

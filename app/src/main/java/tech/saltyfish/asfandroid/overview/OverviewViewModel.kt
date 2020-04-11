@@ -1,12 +1,10 @@
 package tech.saltyfish.asfandroid.overview
 
 import android.app.Application
-import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.preference.PreferenceManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,6 +20,9 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
         PreferenceManager.getDefaultSharedPreferences(context /* Activity context */)
 
 
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean>
+        get() = _loading
 
 
     private val _bots = MutableLiveData<List<Bot>>()
@@ -72,14 +73,18 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
 
     private fun getBotInfo() {
         coroutineScope.launch {
+            _loading.value = true
             val url = sharedPreferences.getString("asfUrl", "");
             if (url == null) {
                 Log.e("getSystemInfo", "url error")
             } else {
                 val getBotPropertyDeferred =
                     AsfApi.retrofitService().getBotPropertiesAsync(
-                        "zzx20001223",
-                        basicAuthorization("skaimid", "vEY8xU9H9fjmXP2")
+                        sharedPreferences.getString("asfIpcPass", "") ?: "",
+                        basicAuthorization(
+                            sharedPreferences.getString("basicAuthUsername", "") ?: "",
+                            sharedPreferences.getString("basicAuthPass", "") ?: ""
+                        )
                     )
                 try {
                     val rs = getBotPropertyDeferred.await()
@@ -119,7 +124,7 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
     fun getCardLeft(): Int {
         var sum = 0;
         bots.value?.forEach { bot ->
-            bot.cardsFarmer.currentGamesFarming.forEach {
+            bot.cardsFarmer.gamesToFarm.forEach {
                 sum += it.cardsRemaining
             }
             bot.cardsFarmer.gamesToFarm.forEach {
@@ -129,4 +134,11 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
         return sum
     }
 
+    fun changeLoadStatus() {
+        if (loading.value != null) {
+            if (loading.value != false) {
+                _loading.value = false
+            }
+        }
+    }
 }

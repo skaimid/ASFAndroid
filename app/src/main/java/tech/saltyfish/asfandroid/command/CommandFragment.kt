@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import tech.saltyfish.asfandroid.MainActivity
 import tech.saltyfish.asfandroid.databinding.FragmentCommandBinding
 
 class CommandFragment : Fragment() {
@@ -83,9 +86,33 @@ class CommandFragment : Fragment() {
             )
         }
 
-        binding.exeButton.setOnClickListener {
-            viewModel.updateCommandLine(binding.commandInput.text.toString())
-        }
+
+
+        viewModel.commandLine.observe(viewLifecycleOwner, Observer {
+            viewModel.changeLoadStatus()
+        })
+
+        viewModel.loading.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                binding.exeButton.setOnClickListener {
+                    Toast.makeText(MainActivity.context, "Loading", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            if (it == false) {
+                binding.exeButton.setOnClickListener {
+                    viewModel.updateCommandLine(binding.commandInput.text.toString())
+                }
+            }
+
+            if (viewModel.loading.value == true) {
+                binding.progressBar3.visibility = View.VISIBLE
+            }
+
+            if (viewModel.loading.value == false) {
+                binding.progressBar3.visibility = View.GONE
+            }
+        })
 
         return binding.root
     }

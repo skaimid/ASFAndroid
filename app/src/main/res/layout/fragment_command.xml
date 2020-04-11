@@ -7,14 +7,17 @@
             name="commandViewModel"
             type="tech.saltyfish.asfandroid.command.CommandViewModel" />
     </data>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
         tools:context=".command.CommandFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true">
 
             <ScrollView
                 android:id="@+id/scrollView2"
@@ -39,7 +42,7 @@
                         style="@style/Widget.AppCompat.TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{commandViewModel.commandLine}"/>
+                        android:text="@{commandViewModel.commandLine}" />
                 </LinearLayout>
             </ScrollView>
 
@@ -60,24 +63,33 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/exe_button"
+                app:layout_constraintEnd_toStartOf="@+id/progressBar3"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/exe_button"
-                android:textColor="@color/primaryTextColor"
-                android:shadowColor="@color/secondaryColor"
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:shadowColor="@color/secondaryColor"
                 android:text="@string/button_exe"
+                android:textColor="@color/primaryTextColor"
                 app:layout_constraintBottom_toBottomOf="@+id/command_input"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:rippleColor="@color/secondaryColor" />
+
+            <ProgressBar
+                android:id="@+id/progressBar3"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/exe_button"
+                app:layout_constraintEnd_toStartOf="@+id/exe_button" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

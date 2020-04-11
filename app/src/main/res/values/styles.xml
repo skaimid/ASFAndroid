@@ -14,13 +14,15 @@
     <style name="AppMaterialTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Add attributes here -->
         <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorAccent">@color/secondaryColor</item>
+        <item name="colorPrimaryDark">@color/secondaryColor</item>
+        <item name="colorAccent">@color/secondaryDarkColor</item>
         <item name="textAppearanceButton">@style/AppTextAppearance.Button</item>
+        <item name="cardBackgroundColor">@color/secondaryColor</item>
     </style>
     <!--To fix rendering in preview -->
     <style name="AppTextAppearance.Button" parent="TextAppearance.MaterialComponents.Button">
         <item name="android:textAllCaps">true</item>
+        <item name="textColorAlertDialogListItem">@color/primaryTextColor</item>
     </style>
 
 </resources>

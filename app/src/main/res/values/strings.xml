@@ -23,9 +23,10 @@
     <string name="overview_bot_status_text">Bots: %1$d Online, %2$d Paused, %3$d Offline, %4$d Disabled</string>
     <string name="start_pause">Start/Pause</string>
     <string name="exist_text">Delete</string>
-    <string name="loading_text">loading...</string>
+    <string name="loading_text">loading…</string>
     <string name="edit_bot_text">Edit</string>
     <string name="submit_text">submit</string>
+    <string name="bot_card_left_text">Card left: %1$d</string>
 
 
 </resources>

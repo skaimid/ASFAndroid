@@ -21,28 +21,11 @@
             app:destination="@id/settingFragment" />
     </fragment>
     <fragment
-        android:id="@+id/ASFSettingFragment"
-        android:name="tech.saltyfish.asfandroid.ASFSettingFragment"
-        android:label="fragment_asf_setting"
-        tools:layout="@layout/fragment_asf_setting" />
-    <fragment
         android:id="@+id/botStatusFragment"
         android:name="tech.saltyfish.asfandroid.botStatus.BotStatusFragment"
         android:label="fragment_bot_status"
         tools:layout="@layout/fragment_bot_status">
-        <action
-            android:id="@+id/action_botStatusFragment_to_botSettingFragment"
-            app:destination="@id/botSettingFragment" />
         <argument android:name="botName"
-            app:argType="string" />
-    </fragment>
-    <fragment
-        android:id="@+id/botSettingFragment"
-        android:name="tech.saltyfish.asfandroid.botSetting.BotSettingFragment"
-        android:label="fragment_bot_setting"
-        tools:layout="@layout/fragment_bot_setting" >
-        <argument
-            android:name="botName"
             app:argType="string" />
     </fragment>
     <fragment
@@ -55,10 +38,6 @@
         android:name="tech.saltyfish.asfandroid.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting">
-        <action
-            android:id="@+id/action_settingFragment_to_ASFSettingFragment"
-            app:destination="@id/ASFSettingFragment"
-            app:enterAnim="@android:anim/fade_in" />
         <action
             android:id="@+id/action_settingFragment_to_aboutkFragment"
             app:destination="@id/aboutFragment"

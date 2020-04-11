@@ -84,6 +84,20 @@ class OverviewFragment : Fragment() {
                     cOffline,
                     cDisabled
                 )
+
+            viewModel.changeLoadStatus()
+        })
+
+        viewModel.loading.observe(viewLifecycleOwner, Observer {
+            if (viewModel.loading.value == true) {
+                binding.toolbar.visibility = View.VISIBLE
+                binding.progressBar2.visibility = View.VISIBLE
+            }
+
+            if (viewModel.loading.value == false) {
+                binding.toolbar.visibility = View.GONE
+                binding.progressBar2.visibility = View.GONE
+            }
         })
 
 

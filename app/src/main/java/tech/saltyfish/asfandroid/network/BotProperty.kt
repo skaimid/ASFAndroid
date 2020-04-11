@@ -1,8 +1,7 @@
 package tech.saltyfish.asfandroid.network
 
-import com.squareup.moshi.JsonClass
-
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class BotProperty(
@@ -118,9 +117,9 @@ data class SteamUserPermissions(
 @JsonClass(generateAdapter = true)
 data class CardsFarmer(
     @Json(name = "CurrentGamesFarming")
-    val currentGamesFarming: List<CurrentGamesFarming> = listOf(),
+    val currentGamesFaring: List<Games> = listOf(),
     @Json(name = "GamesToFarm")
-    val gamesToFarm: List<GamesToFarm> = listOf(),
+    val gamesToFarm: List<Games> = listOf(),
     @Json(name = "Paused")
     val paused: Boolean = false,
     @Json(name = "TimeRemaining")
@@ -128,7 +127,7 @@ data class CardsFarmer(
 )
 
 @JsonClass(generateAdapter = true)
-data class CurrentGamesFarming(
+data class Games(
     @Json(name = "AppID")
     val appID: Int = 0,
     @Json(name = "CardsRemaining")
@@ -139,14 +138,3 @@ data class CurrentGamesFarming(
     val hoursPlayed: Double = 0.0
 )
 
-@JsonClass(generateAdapter = true)
-data class GamesToFarm(
-    @Json(name = "AppID")
-    val appID: Int = 0,
-    @Json(name = "CardsRemaining")
-    val cardsRemaining: Int = 0,
-    @Json(name = "GameName")
-    val gameName: String = "",
-    @Json(name = "HoursPlayed")
-    val hoursPlayed: Double = 0.0
-)

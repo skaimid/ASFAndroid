@@ -13,7 +13,6 @@ import tech.saltyfish.asfandroid.MainActivity
 import tech.saltyfish.asfandroid.basicAuthorization
 import tech.saltyfish.asfandroid.network.AsfApi
 import tech.saltyfish.asfandroid.network.CommandPostProperty
-import java.lang.Exception
 
 class CommandViewModel : ViewModel() {
     private val _commandLine = MutableLiveData<String>()
@@ -23,6 +22,10 @@ class CommandViewModel : ViewModel() {
     val commandLine: LiveData<String>
         get() = _commandLine
 
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean>
+        get() = _loading
+
     // coroutine
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(
@@ -30,29 +33,42 @@ class CommandViewModel : ViewModel() {
     )
 
     init {
+        _loading.value = false
         _commandLine.value = ""
     }
 
     fun updateCommandLine(command: String) {
-        _commandLine.value = _commandLine.value + ">>> " + command + '\n'
+        _commandLine.value = _commandLine.value + ">>>  " + command + '\n'
         coroutineScope.launch {
+            _loading.value = true
             if (baseUrl == null) {
                 Log.e("getSystemInfo", "url error")
             } else {
                 var getCommandResultDeferred = AsfApi.retrofitService().getCommandResultAsync(
-                    "zzx20001223",
-                    basicAuthorization("skaimid", "vEY8xU9H9fjmXP2"),
+                    sharedPreferences.getString("asfIpcPass", "") ?: "",
+                    basicAuthorization(
+                        sharedPreferences.getString("basicAuthUsername", "") ?: "",
+                        sharedPreferences.getString("basicAuthPass", "") ?: ""
+                    ),
                     CommandPostProperty(command)
                 )
 
                 try {
                     var rs = getCommandResultDeferred.await()
-                    _commandLine.value = _commandLine.value + "<<< " + rs.result + '\n'
+                    _commandLine.value = _commandLine.value + "<<<  " + rs.result + '\n' + '\n'
                 } catch (e: Exception) {
-                    _commandLine.value = _commandLine.value + "Error: " + e.message + '\n'
+                    _commandLine.value = _commandLine.value + "Error: " + e.message + '\n' + '\n'
                 }
             }
 
+        }
+    }
+
+    fun changeLoadStatus() {
+        if (loading.value != null) {
+            if (loading.value != false) {
+                _loading.value = false
+            }
         }
     }
 }

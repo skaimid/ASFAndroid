@@ -8,12 +8,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.activity_main.*
 import tech.saltyfish.asfandroid.MainActivity
 import tech.saltyfish.asfandroid.R
 import tech.saltyfish.asfandroid.databinding.FragmentBotStatusBinding
 import tech.saltyfish.asfandroid.network.Bot
+import tech.saltyfish.asfandroid.network.Games
 
 
 class BotStatusFragment : Fragment() {
@@ -38,8 +38,11 @@ class BotStatusFragment : Fragment() {
             )
         binding.botStatusViewModel = viewModel
 
-        binding.botStatusToolBar.menu.findItem(R.id.pause_start).setOnMenuItemClickListener {
+        binding.listFarmGame.adapter = FarmGameAdapter(FarmGameAdapter.OnClickListener {
 
+        })
+
+        binding.botStatusToolBar.menu.findItem(R.id.pause_start).setOnMenuItemClickListener {
             if ((viewModel.bot.value ?: Bot()).steamID != 0L) {
                 if ((viewModel.bot.value ?: Bot()).cardsFarmer.paused) {
                     viewModel.resumeBot((viewModel.bot.value ?: Bot()).botName)
@@ -56,16 +59,7 @@ class BotStatusFragment : Fragment() {
             }
             true
         }
-        binding.botStatusToolBar.menu.findItem(R.id.edit_bot_text).setOnMenuItemClickListener {
-            if ((viewModel.bot.value ?: Bot()).steamID != 0L) {
-                this.findNavController().navigate(
-                    BotStatusFragmentDirections.actionBotStatusFragmentToBotSettingFragment(
-                        (viewModel.bot.value ?: Bot()).botName
-                    )
-                )
-            }
-            true
-        }
+
 
         viewModel.result.observe(viewLifecycleOwner, Observer {
             viewModel.getBotInfo((viewModel.bot.value ?: Bot()).botName)
@@ -104,7 +98,29 @@ class BotStatusFragment : Fragment() {
                         viewModel.bot.value!!.cardsFarmer.timeRemaining
                     )
                 }
+
+            (binding.listFarmGame.adapter as FarmGameAdapter).submitList(
+                (it.cardsFarmer.gamesToFarm)
+                    ?: listOf<Games>()
+            )
+
+            viewModel.changeLoadStatus()
+
         })
+
+        viewModel.loading.observe(viewLifecycleOwner, Observer {
+            if (viewModel.loading.value == true) {
+                binding.progressBar.visibility = View.VISIBLE
+            }
+
+            if (viewModel.loading.value == false) {
+                binding.progressBar.visibility = View.GONE
+            }
+        })
+
+
+
+
 
         return binding.root
     }
