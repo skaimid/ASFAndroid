@@ -69,7 +69,7 @@ interface AsfApiService {
     ):
             Deferred<ExeResult>
 
-    @POST("Bot/{botNames}/Start")
+    @POST("Bot/{botNames}/Stop")
     fun stopBotAsync(
         @Header("Authentication") password: String,
         @Header("Authorization") basicAuthorization: String,
@@ -126,7 +126,6 @@ object AsfApi {
         }
 
         val BASE_URL =
-            //"https://saltyfish.tech/api/"
             baseUrl + "Api/"
 
         // use moshi to phrase json
@@ -135,6 +134,7 @@ object AsfApi {
             .build()
         val httpClient = OkHttpClient.Builder()
 
+        // debug logs
         if (BuildConfig.DEBUG) {
             val logging = HttpLoggingInterceptor()
             logging.setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -148,6 +148,9 @@ object AsfApi {
             .client(httpClient.build())
             .build()
 
+        // because the url may change from time to time so
+        // create a retrofit object every time
         return retrofit.create(AsfApiService::class.java)
     }
+
 }

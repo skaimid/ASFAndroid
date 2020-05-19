@@ -26,7 +26,9 @@ class BotStatusFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // hide nav bar
         (requireActivity() as MainActivity).bottom_nav.visibility = View.INVISIBLE
+
         val binding = FragmentBotStatusBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
 
@@ -40,6 +42,8 @@ class BotStatusFragment : Fragment() {
             )
         binding.botStatusViewModel = viewModel
 
+        // click to go to browser to view the game detail
+        // not capable with steam game client, it do recognise the url, but have trouble view it.
         binding.listFarmGame.adapter = FarmGameAdapter(FarmGameAdapter.OnClickListener {
             val url = "https://store.steampowered.com/app/${it.appID}"
             val webpage: Uri = Uri.parse(url)
@@ -49,6 +53,7 @@ class BotStatusFragment : Fragment() {
 
         })
 
+        // pause and start the bot
         binding.botStatusToolBar.menu.findItem(R.id.pause_start).setOnMenuItemClickListener {
             if ((viewModel.bot.value ?: Bot()).steamID != 0L) {
                 if ((viewModel.bot.value ?: Bot()).cardsFarmer.paused) {
@@ -60,6 +65,7 @@ class BotStatusFragment : Fragment() {
             true
         }
 
+        // delete bot
         binding.botStatusToolBar.menu.findItem(R.id.delete_text).setOnMenuItemClickListener {
 
             viewModel.deleteBot((viewModel.bot.value ?: Bot()).botName)
@@ -67,6 +73,7 @@ class BotStatusFragment : Fragment() {
             true
         }
 
+        // edit bot
         binding.botStatusToolBar.menu.findItem(R.id.edit_bot_text).setOnMenuItemClickListener {
 
             this.findNavController().navigate(
@@ -77,6 +84,8 @@ class BotStatusFragment : Fragment() {
         }
 
 
+        // if some operation was done, then have some response to it.
+        // e.g. make toasts
         viewModel.result.observe(viewLifecycleOwner, Observer {
             viewModel.getBotInfo((viewModel.bot.value ?: Bot()).botName)
             Toast.makeText(
@@ -84,6 +93,8 @@ class BotStatusFragment : Fragment() {
                 viewModel.result.value?.message.toString(),
                 Toast.LENGTH_SHORT
             ).show()
+
+            // if operation is delete, then navigate to override fragment
             if (viewModel.operator.value == "delete") {
                 this.findNavController().navigate(
                     R.id.overviewFragment
@@ -92,7 +103,13 @@ class BotStatusFragment : Fragment() {
         })
 
 
-
+        /**
+         * show the bot status with dynamic change
+         * using data binding with object Bot is not a good option
+         *
+         * if some change happened with vm.bot
+         * the data like @{vm.bot} may change but @{vm.bot.name} will not change
+         */
         viewModel.bot.observe(viewLifecycleOwner, Observer {
 
             if (viewModel.bot.value?.botConfig?.enabled == true) {
@@ -128,6 +145,12 @@ class BotStatusFragment : Fragment() {
 
         })
 
+        /**
+         * change load status
+         * depend on vm.loading
+         *
+         * view model is sth with status, but not view
+         */
         viewModel.loading.observe(viewLifecycleOwner, Observer {
             if (viewModel.loading.value == true) {
                 binding.progressBar.visibility = View.VISIBLE
@@ -142,10 +165,6 @@ class BotStatusFragment : Fragment() {
                 }
             }
         })
-
-
-
-
 
         return binding.root
     }

@@ -37,14 +37,20 @@ class CommandViewModel : ViewModel() {
         _commandLine.value = ""
     }
 
+    /**
+     * @param command
+     *
+     * excuse command in server
+     *
+     */
     fun updateCommandLine(command: String) {
         _commandLine.value = _commandLine.value + ">>>  " + command + '\n'
         coroutineScope.launch {
             _loading.value = true
             if (baseUrl == null) {
-                Log.e("getSystemInfo", "url error")
+                Log.e("getSystemInfo", "url error") // may crash without it
             } else {
-                var getCommandResultDeferred = AsfApi.retrofitService().getCommandResultAsync(
+                val getCommandResultDeferred = AsfApi.retrofitService().getCommandResultAsync(
                     sharedPreferences.getString("asfIpcPass", "") ?: "",
                     basicAuthorization(
                         sharedPreferences.getString("basicAuthUsername", "") ?: "",
@@ -54,7 +60,7 @@ class CommandViewModel : ViewModel() {
                 )
 
                 try {
-                    var rs = getCommandResultDeferred.await()
+                    val rs = getCommandResultDeferred.await()
                     _commandLine.value = _commandLine.value + "<<<  " + rs.result + '\n' + '\n'
                 } catch (e: Exception) {
                     _commandLine.value = _commandLine.value + "Error: " + e.message + '\n' + '\n'

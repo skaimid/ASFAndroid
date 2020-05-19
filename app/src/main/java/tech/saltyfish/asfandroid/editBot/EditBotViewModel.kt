@@ -29,6 +29,7 @@ class EditBotViewModel(botName: String, application: Application) : AndroidViewM
         viewModelJob + Dispatchers.Main
     )
 
+    // status
     private val _bot = MutableLiveData<Bot>()
     val bot: LiveData<Bot>
         get() = _bot
@@ -66,6 +67,8 @@ class EditBotViewModel(botName: String, application: Application) : AndroidViewM
                             sharedPreferences.getString("basicAuthPass", "") ?: ""
                         ), botName
                     )
+
+
                 try {
 
                     val rs = getBotPropertyDeferred.await()

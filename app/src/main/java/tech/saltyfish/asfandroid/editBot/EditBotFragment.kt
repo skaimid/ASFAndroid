@@ -43,6 +43,13 @@ class EditBotFragment : Fragment() {
         binding.editBotHeader.text = botName
         Log.d("bot Name", botName)
 
+        /**
+         * show the bot status with dynamic change
+         * using data binding with object Bot is not a good option
+         *
+         * if some change happened with vm.bot
+         * the data like @{vm.bot} may change but @{vm.bot.name} will not change
+         */
         viewModel.bot.observe(viewLifecycleOwner, Observer {
             binding.steamUserNameEditText.setText(it.nickname)// steam log in
             binding.steamPasswordEditText.setText(it.botConfig.steamPassword)
@@ -53,6 +60,13 @@ class EditBotFragment : Fragment() {
 //            Log.d("sss",it.botConfig.hoursUntilCardDrops.toString())
         })
 
+
+        /**
+         * build json output by my self
+         * because the unchanged var will not be posted
+         * otherwise my cause bugs
+         *
+         */
         binding.submitConfigButton.setOnClickListener {
             val sb = StringBuilder("{\"botConfig\":{")
 
@@ -85,6 +99,14 @@ class EditBotFragment : Fragment() {
             )
         }
 
+
+        /**
+         * change load status
+         * depend on vm.loading
+         *
+         * view model is sth with status, but not view
+         */
+
         viewModel.bot.observe(viewLifecycleOwner, Observer {
             viewModel.changeLoadStatus()
         })
@@ -106,6 +128,7 @@ class EditBotFragment : Fragment() {
             }
         })
 
+        // the progress bar's viability is depend on loading.value
         viewModel.loading.observe(viewLifecycleOwner, Observer {
             if (viewModel.loading.value == true) {
                 binding.editBotProgressBar.visibility = View.VISIBLE

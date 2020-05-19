@@ -20,6 +20,7 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
         PreferenceManager.getDefaultSharedPreferences(context /* Activity context */)
 
 
+    // status for view model
     private val _addBot = MutableLiveData<Boolean>()
     val addBot: LiveData<Boolean>
         get() = _addBot
@@ -50,6 +51,8 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
 
     }
 
+
+    // unused code, may be used one day?
 
 //    private fun getSystemInfo() {
 //        coroutineScope.launch {
@@ -106,16 +109,7 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
-    fun displayPropertyDetails(bot: Bot) {
-        _navigateToSelectedProperty.value = bot
-    }
 
-    /**
-     * After the navigation has taken place, make sure navigateToSelectedProperty is set to null
-     */
-    fun displayPropertyDetailsComplete() {
-        _navigateToSelectedProperty.value = null
-    }
 
     fun getGameLeft(): Int {
         var sum = 0
@@ -144,6 +138,12 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
         return sum
     }
 
+
+    /**
+     * those  functions below is designed to used by view
+     * it's used to change vm's status
+     * since view can't change viewModel's status
+     */
     fun changeLoadStatus() {
         if (loading.value != null) {
             if (loading.value != false) {
@@ -156,5 +156,17 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
         if (addBot.value != null) {
             _addBot.value = !addBot.value!!
         }
+    }
+
+
+    fun displayPropertyDetails(bot: Bot) {
+        _navigateToSelectedProperty.value = bot
+    }
+
+    /**
+     * After the navigation has taken place, make sure navigateToSelectedProperty is set to null
+     */
+    fun displayPropertyDetailsComplete() {
+        _navigateToSelectedProperty.value = null
     }
 }

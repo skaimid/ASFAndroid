@@ -4,6 +4,12 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
+/**
+ * @see ViewModelProvider.Factory
+ *
+ * BotStatusViewModelFactory for BotStatusViewModel
+ */
+
 class BotStatusViewModelFactory(
     private val botName:String,
     private val application: Application

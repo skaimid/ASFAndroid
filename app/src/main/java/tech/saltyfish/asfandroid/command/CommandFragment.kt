@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import tech.saltyfish.asfandroid.databinding.FragmentCommandBinding
 
 class CommandFragment : Fragment() {
+
+    // hints
     private var COMMAND = arrayOf(
         "2fa",
         "2fano",
@@ -86,11 +88,21 @@ class CommandFragment : Fragment() {
         }
 
 
-
+        /**
+         * change viewModel's status
+         *
+         */
         viewModel.commandLine.observe(viewLifecycleOwner, Observer {
             viewModel.changeLoadStatus()
         })
 
+
+        /**
+         * change load status
+         * depend on vm.loading
+         *
+         * view model is sth with status, but not view
+         */
         viewModel.loading.observe(viewLifecycleOwner, Observer {
             if (it == true) {
                 binding.exeButton.setOnClickListener {

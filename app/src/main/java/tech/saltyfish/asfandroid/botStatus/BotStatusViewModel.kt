@@ -46,17 +46,25 @@ class BotStatusViewModel(botName: String, application: Application) :
         get() = _operator
 
 
+    // init
     init {
         getBotInfo(botName)
     }
 
-
+    /**
+     * @param botName bot name
+     *
+     * this is a async function
+     * it is a function with side effect
+     * so it is not very easy to reuse
+     */
     fun deleteBot(botName: String) {
         coroutineScope.launch {
             _loading.value = true
             val url = sharedPreferences.getString("asfUrl", "")
             if (url == null) {
-                Log.e("getSystemInfo", "url error")
+                Log.e("getSystemInfo", "url error")             // if url == null it will crash
+
             } else {
 
                 val getBotPropertyDeferred =
@@ -78,13 +86,18 @@ class BotStatusViewModel(botName: String, application: Application) :
         }
     }
 
-
+    /**
+     * @param botName bot name
+     *
+     *
+     **/
     fun pauseBot(botName: String) {
         coroutineScope.launch {
             _loading.value = true
             val url = sharedPreferences.getString("asfUrl", "")
             if (url == null) {
-                Log.e("getSystemInfo", "url error")
+                Log.e("getSystemInfo", "url error")             // if url == null it will crash
+
             } else {
 
                 val getBotPropertyDeferred =
@@ -105,12 +118,19 @@ class BotStatusViewModel(botName: String, application: Application) :
         }
     }
 
+
+    /**
+     * @param botName bot name
+     *
+     *
+     **/
     fun resumeBot(botName: String) {
         coroutineScope.launch {
             _loading.value = true
             val url = sharedPreferences.getString("asfUrl", "")
             if (url == null) {
-                Log.e("getSystemInfo", "url error")
+                Log.e("getSystemInfo", "url error")             // if url == null it will crash
+
             } else {
 
                 val getBotPropertyDeferred =
@@ -131,10 +151,17 @@ class BotStatusViewModel(botName: String, application: Application) :
         }
     }
 
+
+    /**
+     * @param botName bot name
+     *
+     *
+     **/
     fun getBotInfo(botName: String) {
         coroutineScope.launch {
             _loading.value = true
             val url = sharedPreferences.getString("asfUrl", "")
+            // if url == null it will crash
             if (url == null) {
                 Log.e("getSystemInfo", "url error")
             } else {
@@ -161,6 +188,12 @@ class BotStatusViewModel(botName: String, application: Application) :
         }
     }
 
+
+    /**
+     * those two functions is designed to used by view
+     * it's used to change vm's status
+     * since view can't change viewModel's status
+     */
     fun changeLoadStatus() {
         if (loading.value != null) {
             if (loading.value != false) {

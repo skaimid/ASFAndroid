@@ -41,11 +41,12 @@ class OverviewFragment : Fragment() {
             viewModel.changeAddBotStatus()
         }
 
+        // automatic generate bot name
         binding.addBotButton.setOnClickListener {
             this.findNavController().navigate(
                 OverviewFragmentDirections.actionOverviewFragmentToEditBotFargment(
-                    if (binding.addBotEditText.text.toString() == "")
-                        "Bot-${SimpleDateFormat("yyyy-MM-dd").format(Date())}"
+                    if (binding.addBotEditText.text.toString() == "")// if there is no input
+                        "Bot-${SimpleDateFormat("yyyy-MM-dd", Locale.CHINA).format(Date())}"
                     else
                         binding.addBotEditText.text.toString()
                 )
@@ -65,6 +66,7 @@ class OverviewFragment : Fragment() {
         })
 
 
+        // the logic for bot static
         viewModel.bots.observe(viewLifecycleOwner, Observer {
             binding.overviewGameRemaining.text =
                 getString(R.string.remaining_game_text, viewModel.getGameLeft())
@@ -106,6 +108,8 @@ class OverviewFragment : Fragment() {
             viewModel.changeLoadStatus()
         })
 
+
+        // dynamic change loading status
         viewModel.loading.observe(viewLifecycleOwner, Observer {
             if (it == true) {
                 binding.toolbar.visibility = View.VISIBLE
