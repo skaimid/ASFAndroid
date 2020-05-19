@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import tech.saltyfish.asfandroid.MainActivity
 import tech.saltyfish.asfandroid.databinding.FragmentCommandBinding
 
 class CommandFragment : Fragment() {
@@ -95,7 +94,7 @@ class CommandFragment : Fragment() {
         viewModel.loading.observe(viewLifecycleOwner, Observer {
             if (it == true) {
                 binding.exeButton.setOnClickListener {
-                    Toast.makeText(MainActivity.context, "Loading", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
                 }
             }
 

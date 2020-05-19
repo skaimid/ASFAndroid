@@ -18,7 +18,7 @@ data class Bot(
     @Json(name = "AccountFlags")
     val accountFlags: Int = 0,
     @Json(name = "AvatarHash")
-    val avatarHash: String = "",
+    var avatarHash: String? = "",
     @Json(name = "BotConfig")
     val botConfig: BotConfig = BotConfig(),
     @Json(name = "BotName")
@@ -34,7 +34,7 @@ data class Bot(
     @Json(name = "KeepRunning")
     val keepRunning: Boolean = false,
     @Json(name = "Nickname")
-    val nickname: String = "",
+    val nickname: String? = "",
     @Json(name = "s_SteamID")
     val sSteamID: String = "",
     @Json(name = "SteamID")
@@ -64,7 +64,7 @@ data class BotConfig(
     @Json(name = "GamesPlayedWhileIdle")
     val gamesPlayedWhileIdle: List<Int> = listOf(),
     @Json(name = "HoursUntilCardDrops")
-    val hoursUntilCardDrops: Int = 0,
+    val hoursUntilCardDrops: Int = 3,
     @Json(name = "IdlePriorityQueueOnly")
     val idlePriorityQueueOnly: Boolean = false,
     @Json(name = "IdleRefundableGames")

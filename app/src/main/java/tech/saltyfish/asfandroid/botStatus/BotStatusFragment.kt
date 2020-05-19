@@ -1,5 +1,7 @@
 package tech.saltyfish.asfandroid.botStatus
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +10,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.activity_main.*
 import tech.saltyfish.asfandroid.MainActivity
 import tech.saltyfish.asfandroid.R
 import tech.saltyfish.asfandroid.databinding.FragmentBotStatusBinding
 import tech.saltyfish.asfandroid.network.Bot
-import tech.saltyfish.asfandroid.network.Games
 
 
 class BotStatusFragment : Fragment() {
@@ -39,6 +41,11 @@ class BotStatusFragment : Fragment() {
         binding.botStatusViewModel = viewModel
 
         binding.listFarmGame.adapter = FarmGameAdapter(FarmGameAdapter.OnClickListener {
+            val url = "https://store.steampowered.com/app/${it.appID}"
+            val webpage: Uri = Uri.parse(url)
+            val intent = Intent(Intent.ACTION_VIEW, webpage)
+
+            startActivity(intent)
 
         })
 
@@ -54,9 +61,18 @@ class BotStatusFragment : Fragment() {
         }
 
         binding.botStatusToolBar.menu.findItem(R.id.delete_text).setOnMenuItemClickListener {
-            if ((viewModel.bot.value ?: Bot()).steamID != 0L) {
-                viewModel.deleteBot((viewModel.bot.value ?: Bot()).botName)
-            }
+
+            viewModel.deleteBot((viewModel.bot.value ?: Bot()).botName)
+            viewModel.changeOperator("delete")
+            true
+        }
+
+        binding.botStatusToolBar.menu.findItem(R.id.edit_bot_text).setOnMenuItemClickListener {
+
+            this.findNavController().navigate(
+                BotStatusFragmentDirections.actionBotStatusFragmentToEditBotFargment(botName)
+            )
+
             true
         }
 
@@ -68,6 +84,11 @@ class BotStatusFragment : Fragment() {
                 viewModel.result.value?.message.toString(),
                 Toast.LENGTH_SHORT
             ).show()
+            if (viewModel.operator.value == "delete") {
+                this.findNavController().navigate(
+                    R.id.overviewFragment
+                )
+            }
         })
 
 
@@ -90,10 +111,10 @@ class BotStatusFragment : Fragment() {
 
             binding.botStatusTimeLeftText.text =
                 when (viewModel.bot.value?.cardsFarmer?.timeRemaining) {
-                    "00:00:00" -> MainActivity.context?.getText(R.string.farm_complete_text)
-                        ?: "complete"
+                    "00:00:00" -> getText(R.string.farm_complete_text)
+
                     null -> "-"
-                    else -> MainActivity.context?.getString(
+                    else -> getString(
                         R.string.Farming_text,
                         viewModel.bot.value!!.cardsFarmer.timeRemaining
                     )
@@ -101,7 +122,6 @@ class BotStatusFragment : Fragment() {
 
             (binding.listFarmGame.adapter as FarmGameAdapter).submitList(
                 (it.cardsFarmer.gamesToFarm)
-                    ?: listOf<Games>()
             )
 
             viewModel.changeLoadStatus()
@@ -115,6 +135,11 @@ class BotStatusFragment : Fragment() {
 
             if (viewModel.loading.value == false) {
                 binding.progressBar.visibility = View.GONE
+                if (viewModel.operator.value == "delete" && viewModel.result.value?.success == true) {
+                    this.findNavController().navigate(
+                        R.id.overviewFragment
+                    )
+                }
             }
         })
 

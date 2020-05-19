@@ -19,17 +19,18 @@ class SettingFragment : Fragment() {
         (requireActivity() as MainActivity).bottom_nav.visibility = View.VISIBLE
         val binding = FragmentSettingBinding.inflate(inflater)
 
-
-        binding.appConfCardView.setOnClickListener { view:View ->
+        // navigate to AppSettingFragment
+        binding.appConfCardView.setOnClickListener { view: View ->
             (requireActivity() as MainActivity).bottom_nav.visibility = View.GONE
             view.findNavController()
                 .navigate(SettingFragmentDirections.actionSettingFragmentToAppSettingFragment())
         }
 
-        binding.aboutCardview.setOnClickListener { view:View->
+        // navigate to AboutFragment
+        binding.aboutCardview.setOnClickListener { view: View ->
             (requireActivity() as MainActivity).bottom_nav.visibility = View.GONE
             view.findNavController()
-                .navigate(SettingFragmentDirections.actionSettingFragmentToAboutkFragment())
+                .navigate(SettingFragmentDirections.actionSettingFragmentToAboutkFragment())// aboytk is a typo!!
         }
 
 

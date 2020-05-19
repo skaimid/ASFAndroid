@@ -25,4 +25,21 @@
     <string name="loading_text">加载中...</string>
     <string name="submit_text">提交</string>
     <string name="bot_card_left_text">剩余卡片: %1$d</string>
+    <string name="bot_status_words">"机器人状态: "</string>
+    <string name="add_bot_words">添加机器人</string>
+    <string name="steam_login_text">Steam 登录</string>
+    <string name="steam_user_name_text">Steam 用户名</string>
+    <string name="steam_password_text">Steam 密码</string>
+    <string name="customize_text">自定义</string>
+    <string name="performance_text">性能</string>
+    <string name="hoursuntilcarddrops_tex">hours Until Card Drops</string>
+    <string name="input_bot_name_here">在此输入机器人名称</string>
+    <string name="click_to_cancel_text">点击以取消</string>
+    <string name="custom_game_played_while_farming">自定义挂卡时显示</string>
+    <string name="old_password_won_t_be_shown">旧密码不会显示</string>
+    <string name="update_success_text">更新成功</string>
+    <string name="_3_is_recommanded">推荐设为 3</string>
+    <string name="steam_game_id_split_by">steam 游戏ID，用 \' , \' 隔开</string>
+    <string name="custom_game_played_while_idle">自定义闲时显示</string>
+    <string name="games_played_while_idle">闲时指定运行的 Steam 游戏</string>
 </resources>

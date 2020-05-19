@@ -20,6 +20,10 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
         PreferenceManager.getDefaultSharedPreferences(context /* Activity context */)
 
 
+    private val _addBot = MutableLiveData<Boolean>()
+    val addBot: LiveData<Boolean>
+        get() = _addBot
+
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean>
         get() = _loading
@@ -39,7 +43,7 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
     )
 
     init {
-
+        _addBot.value = false
 
         //getSystemInfo()
         getBotInfo()
@@ -74,7 +78,7 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
     private fun getBotInfo() {
         coroutineScope.launch {
             _loading.value = true
-            val url = sharedPreferences.getString("asfUrl", "");
+            val url = sharedPreferences.getString("asfUrl", "")
             if (url == null) {
                 Log.e("getSystemInfo", "url error")
             } else {
@@ -89,8 +93,14 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
                 try {
                     val rs = getBotPropertyDeferred.await()
                     _bots.value = rs.result.values.toList()
+                    _bots.value?.forEach {
+                        if (it.avatarHash == null)
+                            it.avatarHash = " "
+                    }
+
+
                 } catch (e: Exception) {
-                    Log.e("getBotInfo", e.message.toString())
+                    Log.e("getBotInfo 1", e.message.toString())
                 }
             }
         }
@@ -108,7 +118,7 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun getGameLeft(): Int {
-        var sum = 0;
+        var sum = 0
         bots.value?.forEach {
             sum += it.cardsFarmer.gamesToFarm.size
         }
@@ -122,7 +132,7 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun getCardLeft(): Int {
-        var sum = 0;
+        var sum = 0
         bots.value?.forEach { bot ->
             bot.cardsFarmer.gamesToFarm.forEach {
                 sum += it.cardsRemaining
@@ -139,6 +149,12 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
             if (loading.value != false) {
                 _loading.value = false
             }
+        }
+    }
+
+    fun changeAddBotStatus() {
+        if (addBot.value != null) {
+            _addBot.value = !addBot.value!!
         }
     }
 }

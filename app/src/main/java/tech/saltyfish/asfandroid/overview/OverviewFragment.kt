@@ -13,6 +13,8 @@ import tech.saltyfish.asfandroid.MainActivity
 import tech.saltyfish.asfandroid.R
 import tech.saltyfish.asfandroid.databinding.FragmentOverviewBinding
 import tech.saltyfish.asfandroid.network.Bot
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class OverviewFragment : Fragment() {
@@ -34,6 +36,22 @@ class OverviewFragment : Fragment() {
         binding.botRecyclerView.adapter = BotGridAdapter(BotGridAdapter.OnClickListener {
             viewModel.displayPropertyDetails(it)
         })
+
+        binding.addBotText.setOnClickListener {
+            viewModel.changeAddBotStatus()
+        }
+
+        binding.addBotButton.setOnClickListener {
+            this.findNavController().navigate(
+                OverviewFragmentDirections.actionOverviewFragmentToEditBotFargment(
+                    if (binding.addBotEditText.text.toString() == "")
+                        "Bot-${SimpleDateFormat("yyyy-MM-dd").format(Date())}"
+                    else
+                        binding.addBotEditText.text.toString()
+                )
+            )
+
+        }
 
         viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, Observer {
             if (null != it) {
@@ -58,7 +76,7 @@ class OverviewFragment : Fragment() {
             var cOnline = 0
             var cPaused = 0
             var cOffline = 0
-            var cDisabled = 0;
+            var cDisabled = 0
 
             viewModel.bots.value?.forEach { bot: Bot ->
                 if (bot.botConfig.enabled) {
@@ -89,16 +107,33 @@ class OverviewFragment : Fragment() {
         })
 
         viewModel.loading.observe(viewLifecycleOwner, Observer {
-            if (viewModel.loading.value == true) {
+            if (it == true) {
                 binding.toolbar.visibility = View.VISIBLE
                 binding.progressBar2.visibility = View.VISIBLE
+                binding.addBotText.isEnabled = false
             }
 
-            if (viewModel.loading.value == false) {
+            if (it == false) {
                 binding.toolbar.visibility = View.GONE
                 binding.progressBar2.visibility = View.GONE
+                binding.addBotText.isEnabled = true
             }
         })
+
+        viewModel.addBot.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                binding.addBotButton.visibility = View.VISIBLE
+                binding.addBotEditText.visibility = View.VISIBLE
+                binding.addBotText.text = getText(R.string.click_to_cancel_text)
+            }
+
+            if (it == false) {
+                binding.addBotButton.visibility = View.GONE
+                binding.addBotEditText.visibility = View.GONE
+                binding.addBotText.text = getText(R.string.add_bot_words)
+            }
+        })
+
 
 
         return binding.root

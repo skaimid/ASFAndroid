@@ -27,6 +27,24 @@
     <string name="edit_bot_text">Edit</string>
     <string name="submit_text">submit</string>
     <string name="bot_card_left_text">Card left: %1$d</string>
-
+    <string name="bot_status_words">Bot Status:</string>
+    <string name="add_bot_words">Add Bot</string>
+    <string name="steam_login_text">Steam Login</string>
+    <string name="steam_user_name_text">Steam User name</string>
+    <string name="steam_password_text">Steam Password</string>
+    <string name="customize_text">Customize</string>
+    <string name="performance_text">Performance</string>
+    <string name="hoursuntilcarddrops_tex">hours Until Card Drops</string>
+    <string name="input_bot_name_here">input bot name here</string>
+    <string name="click_to_cancel_text">Click to cancel</string>
+    <string name="games_played_while_idle">Games Played While Idle</string>
+    <string name="custom_game_played_while_farming">Custom Game Played While Farming</string>
+    <string name="custom_game_played_while_idle">Custom Game Played While Idle</string>
+    <string name="old_password_won_t_be_shown">old password won\'t be shown</string>
+    <string name="update_success_text">Update Success!</string>
+    <string name="_3_is_recommanded">3 is recommanded</string>
+    <string name="steam_game_id_split_by">steam game id, split by \' , \'</string>
+    <string name="farming_cards">e.g. Farming Cards</string>
+    <string name="playing_android_studio">e.g. Playing Android Studio</string>
 
 </resources>

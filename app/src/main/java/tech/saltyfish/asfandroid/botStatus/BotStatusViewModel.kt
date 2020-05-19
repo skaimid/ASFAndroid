@@ -41,6 +41,10 @@ class BotStatusViewModel(botName: String, application: Application) :
     val loading: LiveData<Boolean>
         get() = _loading
 
+    private val _operator = MutableLiveData<String>()
+    val operator: LiveData<String>
+        get() = _operator
+
 
     init {
         getBotInfo(botName)
@@ -50,7 +54,7 @@ class BotStatusViewModel(botName: String, application: Application) :
     fun deleteBot(botName: String) {
         coroutineScope.launch {
             _loading.value = true
-            val url = sharedPreferences.getString("asfUrl", "");
+            val url = sharedPreferences.getString("asfUrl", "")
             if (url == null) {
                 Log.e("getSystemInfo", "url error")
             } else {
@@ -78,7 +82,7 @@ class BotStatusViewModel(botName: String, application: Application) :
     fun pauseBot(botName: String) {
         coroutineScope.launch {
             _loading.value = true
-            val url = sharedPreferences.getString("asfUrl", "");
+            val url = sharedPreferences.getString("asfUrl", "")
             if (url == null) {
                 Log.e("getSystemInfo", "url error")
             } else {
@@ -104,7 +108,7 @@ class BotStatusViewModel(botName: String, application: Application) :
     fun resumeBot(botName: String) {
         coroutineScope.launch {
             _loading.value = true
-            val url = sharedPreferences.getString("asfUrl", "");
+            val url = sharedPreferences.getString("asfUrl", "")
             if (url == null) {
                 Log.e("getSystemInfo", "url error")
             } else {
@@ -130,7 +134,7 @@ class BotStatusViewModel(botName: String, application: Application) :
     fun getBotInfo(botName: String) {
         coroutineScope.launch {
             _loading.value = true
-            val url = sharedPreferences.getString("asfUrl", "");
+            val url = sharedPreferences.getString("asfUrl", "")
             if (url == null) {
                 Log.e("getSystemInfo", "url error")
             } else {
@@ -147,6 +151,9 @@ class BotStatusViewModel(botName: String, application: Application) :
 
                     val rs = getBotPropertyDeferred.await()
                     _bot.value = rs.result.values.toList()[0]
+                    _bot.value?.avatarHash = _bot.value?.avatarHash ?: " "
+
+
                 } catch (e: Exception) {
                     Log.e("getBotInfo", e.message.toString())
                 }
@@ -161,4 +168,9 @@ class BotStatusViewModel(botName: String, application: Application) :
             }
         }
     }
+
+    fun changeOperator(op: String) {
+        _operator.value = op
+    }
+
 }

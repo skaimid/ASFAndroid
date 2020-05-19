@@ -19,14 +19,21 @@
         <action
             android:id="@+id/action_overviewFragment_to_settingFragment"
             app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_overviewFragment_to_editBotFargment"
+            app:destination="@id/editBotFargment" />
     </fragment>
     <fragment
         android:id="@+id/botStatusFragment"
         android:name="tech.saltyfish.asfandroid.botStatus.BotStatusFragment"
         android:label="fragment_bot_status"
         tools:layout="@layout/fragment_bot_status">
-        <argument android:name="botName"
+        <argument
+            android:name="botName"
             app:argType="string" />
+        <action
+            android:id="@+id/action_botStatusFragment_to_editBotFargment"
+            app:destination="@id/editBotFargment" />
     </fragment>
     <fragment
         android:id="@+id/commandFragment"
@@ -54,6 +61,14 @@
     <fragment
         android:id="@+id/appSettingFragment"
         android:name="tech.saltyfish.asfandroid.AppSettingFragment"
-        android:label="fragment_app_setting"
-        />
+        android:label="fragment_app_setting" />
+    <fragment
+        android:id="@+id/editBotFargment"
+        android:name="tech.saltyfish.asfandroid.editBot.EditBotFragment"
+        android:label="EditBotFargment"
+        tools:layout="@layout/fragment_edit_bot">
+        <argument
+            android:name="BotName"
+            app:argType="string" />
+    </fragment>
 </navigation>

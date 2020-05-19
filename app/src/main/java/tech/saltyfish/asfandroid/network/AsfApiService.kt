@@ -5,11 +5,16 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
+import okhttp3.OkHttpClient
+import okhttp3.RequestBody
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
+import tech.saltyfish.asfandroid.BuildConfig
 import tech.saltyfish.asfandroid.MainActivity
+
 
 private val sharedPreferences =
     PreferenceManager.getDefaultSharedPreferences(MainActivity.context /* Activity context */)
@@ -91,6 +96,17 @@ interface AsfApiService {
             Deferred<ExeResult>
 
 
+    @POST("Bot/{botNames}")
+    @Headers("Content-Type: application/json")
+    fun changeBotConfigAsync(
+        @Header("Authentication") password: String,
+        @Header("Authorization") basicAuthorization: String,
+        @Path("botNames") botNames: String,
+        @Body configBody: RequestBody
+    ):
+            Deferred<MultiExeResult>
+
+
     // test if service is usable or configuration is right
     @GET("ASF")
     fun testApi(
@@ -117,11 +133,19 @@ object AsfApi {
         val moshi = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
             .build()
+        val httpClient = OkHttpClient.Builder()
+
+        if (BuildConfig.DEBUG) {
+            val logging = HttpLoggingInterceptor()
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+            httpClient.addInterceptor(logging)
+        }
 
         val retrofit = Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .baseUrl(BASE_URL)
+            .client(httpClient.build())
             .build()
 
         return retrofit.create(AsfApiService::class.java)

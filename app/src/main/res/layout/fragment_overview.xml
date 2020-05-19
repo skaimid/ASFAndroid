@@ -13,7 +13,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="773dp"
         android:animateLayoutChanges="true">
 
         <androidx.appcompat.widget.Toolbar
@@ -45,7 +45,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/secondaryTextColor" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -64,7 +65,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/secondaryTextColor" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -84,7 +86,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/secondaryTextColor" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -110,7 +113,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:clipToPadding="false"
@@ -118,8 +121,9 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView4"
+            app:layout_constraintTop_toBottomOf="@+id/add_bot_edit_text"
             app:spanCount="1"
             tools:listitem="@layout/bot_item" />
 
@@ -131,6 +135,52 @@
             app:layout_constraintEnd_toEndOf="@+id/toolbar"
             app:layout_constraintStart_toStartOf="@+id/toolbar"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/bot_status_words"
+            android:textColor="@color/primaryColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView4" />
+
+        <TextView
+            android:id="@+id/add_bot_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/add_bot_words"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView4" />
+
+        <EditText
+            android:id="@+id/add_bot_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="@string/input_bot_name_here"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/add_bot_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_bot_text" />
+
+        <Button
+            android:id="@+id/add_bot_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@string/submit_text"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/add_bot_edit_text" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
