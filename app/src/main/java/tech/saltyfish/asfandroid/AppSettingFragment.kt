@@ -42,22 +42,22 @@ class AppSettingFragment : PreferenceFragmentCompat() {
 
         // on every chanage of Preference we test connect
 
-        findPreference<EditTextPreference>("asfUrl")?.setOnPreferenceChangeListener { preference: Preference, any: Any ->
+        findPreference<EditTextPreference>("asfUrl")?.setOnPreferenceChangeListener { _: Preference, _: Any ->
             testConn()
             true
         }
 
-        findPreference<EditTextPreference>("asfIpcPass")?.setOnPreferenceChangeListener { preference: Preference, any: Any ->
+        findPreference<EditTextPreference>("asfIpcPass")?.setOnPreferenceChangeListener { _: Preference, _: Any ->
             testConn()
             true
         }
 
-        findPreference<EditTextPreference>("basicAuthUsername")?.setOnPreferenceChangeListener { preference: Preference, any: Any ->
+        findPreference<EditTextPreference>("basicAuthUsername")?.setOnPreferenceChangeListener { _: Preference, _: Any ->
             testConn()
             true
         }
 
-        findPreference<EditTextPreference>("basicAuthPass")?.setOnPreferenceChangeListener { preference: Preference, any: Any ->
+        findPreference<EditTextPreference>("basicAuthPass")?.setOnPreferenceChangeListener { _: Preference, _: Any ->
             testConn()
             true
         }
