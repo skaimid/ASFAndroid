@@ -5,7 +5,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".AboutFragment">
+        tools:context=".appSettings.AboutFragment">
 
         <TextView
             android:id="@+id/about_text_view"

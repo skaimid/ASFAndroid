@@ -42,7 +42,7 @@
         tools:layout="@layout/fragment_command" />
     <fragment
         android:id="@+id/settingFragment"
-        android:name="tech.saltyfish.asfandroid.SettingFragment"
+        android:name="tech.saltyfish.asfandroid.appSettings.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting">
         <action
@@ -56,11 +56,11 @@
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="tech.saltyfish.asfandroid.AboutFragment"
+        android:name="tech.saltyfish.asfandroid.appSettings.AboutFragment"
         android:label="fragment_about" />
     <fragment
         android:id="@+id/appSettingFragment"
-        android:name="tech.saltyfish.asfandroid.AppSettingFragment"
+        android:name="tech.saltyfish.asfandroid.appSettings.AppSettingFragment"
         android:label="fragment_app_setting" />
     <fragment
         android:id="@+id/editBotFargment"

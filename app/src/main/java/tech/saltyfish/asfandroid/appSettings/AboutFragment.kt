@@ -1,4 +1,4 @@
-package tech.saltyfish.asfandroid
+package tech.saltyfish.asfandroid.appSettings
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import tech.saltyfish.asfandroid.databinding.FragmentAboutBinding
+import tech.saltyfish.asfandroid.toSpanned
 
 
 class AboutFragment : Fragment() {

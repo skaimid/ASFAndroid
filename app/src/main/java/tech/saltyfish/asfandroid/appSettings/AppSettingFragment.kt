@@ -1,4 +1,4 @@
-package tech.saltyfish.asfandroid
+package tech.saltyfish.asfandroid.appSettings
 
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +16,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import tech.saltyfish.asfandroid.MainActivity
+import tech.saltyfish.asfandroid.R
+import tech.saltyfish.asfandroid.basicAuthorization
 import tech.saltyfish.asfandroid.network.AsfApi
 
 

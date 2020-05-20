@@ -1,4 +1,4 @@
-package tech.saltyfish.asfandroid
+package tech.saltyfish.asfandroid.appSettings
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.activity_main.*
+import tech.saltyfish.asfandroid.MainActivity
 import tech.saltyfish.asfandroid.databinding.FragmentSettingBinding
 
 
